@@ -1,4 +1,4 @@
-import { Button, Form, Input, message, Select } from 'antd';
+import { Button, Form, Input, message, Select, Table } from 'antd';
 import Checkbox from 'antd/lib/checkbox/Checkbox';
 import React, { useEffect, useRef, useState } from 'react'
 import { useSelector } from 'react-redux'
@@ -52,8 +52,25 @@ function CampaignCreatePage() {
         
         setDiscountRate((totalPrice-indirim)/totalPrice)
         
-        console.log(discountRate)
+        console.log(discountRate)        
     }
+    const columns = [
+        {
+          title: 'Name',
+          dataIndex: 'productName',
+          key: 'name',
+        },
+        {
+          title: 'Age',
+          dataIndex: 'unitPrice',
+          key: 'age',
+        },
+        {
+          title: 'Address',
+          dataIndex: 'quantityPerUnit',
+          key: 'address',
+        },
+      ];
     
   return (
     <div>
@@ -92,12 +109,11 @@ function CampaignCreatePage() {
 
                 </Form.Item>
 
-                {
-                    productList && productList?.map((item)=>{
-                        return(<><p>{item.productName} {item.unitPrice} {item.quantityPerUnit}</p></>)
-                    })
-                }
-                <p>{totalPrice}</p>
+                <Table dataSource={productList} columns={columns} />;
+
+
+
+                <h2>TOPLAM FİYAT: {totalPrice}</h2>
 
                 
                 <Form.Item
